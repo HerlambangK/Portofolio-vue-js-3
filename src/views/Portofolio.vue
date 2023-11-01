@@ -36,7 +36,6 @@
               </li>
             </ul>
             <h2 class="text-xl font-semibold">{{ item.title }}</h2>
-
             <p class="mt-4 text-sm text-gray-300">{{ item.description }}</p>
             <div class="flex items-center justify-between md:col-span-1">
               <button
@@ -44,7 +43,7 @@
                 class="flex items-center mt-3 h-[1.5rem] w-[5rem] md:w-[5rem] text-white rounded-full outline-none transition-all focus:scale-110 hover:scale-110 hover:bg-gray-950 active:scale-105 bg-white bg-opacity-10 disabled:scale-100 disabled:bg-opacity-65"
                 @click="openGithubLink(item.linkGithub)"
               >
-                <BsGithub class="mr-2 ml-2 h-3 w-3" />
+                <font-awesome-icon class="mr-2 ml-2 h-3 w-3" icon="fa-brands fa-github" />
                 <span class="text-[8px] md:text-[10px]">Github</span>
               </button>
               <button
@@ -52,7 +51,8 @@
                 class="flex items-center mt-3 h-[1.5rem] w-[5rem] md:w-[5rem] text-white rounded-full outline-none transition-all focus:scale-110 hover:scale-110 hover:bg-gray-950 active:scale-105 bg-white bg-opacity-10 disabled:scale-100 disabled:bg-opacity-65"
                 @click="openPreview(item.priview)"
               >
-                <BsGithub class="mr-2 ml-2 h-3 w-3" />
+                <font-awesome-icon class="mr-2 ml-2 h-3 w-3" icon="fa-solid fa-magnifying-glass" />
+
                 <span class="text-[8px] md:text-[10px]">Priview</span>
               </button>
             </div>
