@@ -9,14 +9,15 @@
         </h1>
         <div class="flex flex-col lg:flex-row lg:items-center gap-3 mt-6">
           <hr class="w-10 border bg-gray-400" />
-          <span class="md:text-md font-medium text-gray-400">
-            Front End Developer
-          </span>
+          <span class="md:text-md font-medium text-gray-400"> Front End Developer </span>
         </div>
       </div>
+
+      <!-- <Button :icon-left="EnvelopeIcon">Hallo</Button> -->
+
       <a
         class="text-black bg-white md:opacity-50 hover:opacity-100 px-7 py-2 items-center rounded-full cursor-pointer borderBlack"
-        :href="'https://drive.google.com/file/d/1mG8LSaSVqrQGZA19GUgj_o15_NtiZUDR/view?usp=sharing'"
+        :href="'https://drive.google.com/file/d/1n6KBZBfHJcZQoC69ywWNJ_xTPHGhZDom/view?usp=sharing'"
       >
         Download CV
       </a>
@@ -58,31 +59,30 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-
+import { ref } from 'vue'
+import Button from '../components/Button.vue'
+import { EnvelopeIcon } from '@heroicons/vue/20/solid'
 const items = ref([
   {
-    title: "Bembie Resto",
-    image: "/img/webPorto/restoweb.png",
-    link: "",
-    date: "May 15, 2023",
-    description:
-      "Bembie Resto is a website showcasing restaurant details, including menus.",
+    title: 'Bembie Resto',
+    image: '/img/webPorto/restoweb.png',
+    link: '',
+    date: 'May 15, 2023',
+    description: 'Bembie Resto is a website showcasing restaurant details, including menus.'
   },
   {
-    title: "Quizmify",
-    image: "/img/webPorto/quizmify.png",
-    link: "https://quizmify-herlambangk.vercel.app/",
-    date: "Feb 8, 2023",
-    description:
-      "Quizmify is a quiz platform that offers a variety of questions",
+    title: 'Quizmify',
+    image: '/img/webPorto/quizmify.png',
+    link: 'https://quizmify-herlambangk.vercel.app/',
+    date: 'Feb 8, 2023',
+    description: 'Quizmify is a quiz platform that offers a variety of questions'
   },
   {
-    title: "Niagaweb",
-    image: "/img/webPorto/Niagaweb-studycase.png",
-    link: "https://landing-page-niagaweb.vercel.app/",
-    date: "Nov 16, 2022",
-    description: "https://landing-page-niagaweb.vercel.app/",
-  },
-]);
+    title: 'Niagaweb',
+    image: '/img/webPorto/Niagaweb-studycase.png',
+    link: 'https://landing-page-niagaweb.vercel.app/',
+    date: 'Nov 16, 2022',
+    description: 'https://landing-page-niagaweb.vercel.app/'
+  }
+])
 </script>
