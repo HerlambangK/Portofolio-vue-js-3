@@ -42,7 +42,7 @@
               <button
                 v-if="item.linkGithub"
                 class="flex items-center mt-3 h-[1.5rem] w-[5rem] md:w-[5rem] text-white rounded-full outline-none transition-all focus:scale-110 hover:scale-110 hover:bg-gray-950 active:scale-105 bg-white bg-opacity-10 disabled:scale-100 disabled:bg-opacity-65"
-                @click="window.open(item.linkGithub, '_blank')"
+                @click="openGithubLink(item.linkGithub)"
               >
                 <BsGithub class="mr-2 ml-2 h-3 w-3" />
                 <span class="text-[8px] md:text-[10px]">Github</span>
@@ -50,7 +50,7 @@
               <button
                 v-if="item.priview"
                 class="flex items-center mt-3 h-[1.5rem] w-[5rem] md:w-[5rem] text-white rounded-full outline-none transition-all focus:scale-110 hover:scale-110 hover:bg-gray-950 active:scale-105 bg-white bg-opacity-10 disabled:scale-100 disabled:bg-opacity-65"
-                @click="window.open(item.priview, '_blank')"
+                @click="openPreview(item.priview)"
               >
                 <BsGithub class="mr-2 ml-2 h-3 w-3" />
                 <span class="text-[8px] md:text-[10px]">Priview</span>
@@ -65,7 +65,6 @@
 
 <script setup>
 import { ref } from 'vue'
-
 const items = ref([
   {
     title: 'Bembie Resto',
@@ -101,4 +100,12 @@ const items = ref([
     tags: ['Next Js', 'TypeScript', 'Prisma', 'Tailwind', 'ChatGPT', 'Vercel']
   }
 ])
+
+const openGithubLink = (link) => {
+  window.open(link, '_blank')
+}
+
+const openPreview = (link) => {
+  window.open(link, '_blank')
+}
 </script>

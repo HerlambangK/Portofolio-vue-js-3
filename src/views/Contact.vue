@@ -155,7 +155,7 @@ export default {
 
     const submitForm = async () => {
       try {
-        alert('success, Data terkirim')
+        alert('success, Data terkirim', formData)
         //   const { data, error } = await sendEmail(
         //     formData.senderEmail,
         //     formData.message
