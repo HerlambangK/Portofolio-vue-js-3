@@ -1,4 +1,5 @@
 // store.ts
+// import { createStore } from "vuex";
 import { createStore } from "vuex";
 import axios from "axios";
 
@@ -15,7 +16,8 @@ interface State {
 }
 
 // const store: Store<State> = createStore({
-const store = createStore<State>({
+// const store = createStore<State>({
+export default createStore({
   state: {
     provinces: [],
     regencies: [],
@@ -81,4 +83,4 @@ const store = createStore<State>({
   },
 });
 
-export default store;
+// export default store;
