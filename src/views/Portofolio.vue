@@ -13,7 +13,7 @@
   </header>
   <div class="max-w-screen-lg px-8 lg:px-1 py-8">
     <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-      <a :href="item.link" v-for="item in items">
+      <a :href="item.link" v-for="item in items" :key="item.title">
         <div class="overflow-hidden rounded-md bg-gray-800">
           <div class="aspect-w-3 aspect-h-2">
             <img
@@ -64,44 +64,41 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref } from 'vue'
 
 const items = ref([
   {
-    title: "Bembie Resto",
-    image: "/img/webPorto/restoweb.png",
-    linkGithub: "https://github.com/HerlambangK/Restoran-Kita",
-    priview: "https://61ab76b6238b9566f4153916--restobembi.netlify.app/",
-    description:
-      "Bembie Pokedex is a web app showing pokemon and user can get detail pokemon",
-    tags: ["HTML", "Css", "Javascript", "Webpack", "Karma", "Jasmine"],
+    title: 'Bembie Resto',
+    image: '/img/webPorto/restoweb.png',
+    linkGithub: 'https://github.com/HerlambangK/Restoran-Kita',
+    priview: 'https://61ab76b6238b9566f4153916--restobembi.netlify.app/',
+    description: 'Bembie Pokedex is a web app showing pokemon and user can get detail pokemon',
+    tags: ['HTML', 'Css', 'Javascript', 'Webpack', 'Karma', 'Jasmine']
   },
   {
-    title: "PokeDex",
-    image: "/img/webPorto/pokedex.png",
-    linkGithub: "https://github.com/HerlambangK/pokedex",
-    priview: "https://bembiepokedex.netlify.app/",
-    description:
-      "Bembie Pokedex is a web app showing pokemon and user can get detail pokemon",
-    tags: ["React"],
+    title: 'PokeDex',
+    image: '/img/webPorto/pokedex.png',
+    linkGithub: 'https://github.com/HerlambangK/pokedex',
+    priview: 'https://bembiepokedex.netlify.app/',
+    description: 'Bembie Pokedex is a web app showing pokemon and user can get detail pokemon',
+    tags: ['React']
   },
   {
-    title: "Quizmify",
-    image: "/img/webPorto/quizmify.png",
-    linkGithub: "https://github.com/HerlambangK/Quizymify",
-    priview: "https://quizmify-herlambangk.vercel.app/",
-    description:
-      "Quizmify is a quiz platform that offers a variety of questions",
-    tags: ["Next Js", "TypeScript", "Prisma", "Tailwind", "ChatGPT", "Vercel"],
+    title: 'Quizmify',
+    image: '/img/webPorto/quizmify.png',
+    linkGithub: 'https://github.com/HerlambangK/Quizymify',
+    priview: 'https://quizmify-herlambangk.vercel.app/',
+    description: 'Quizmify is a quiz platform that offers a variety of questions',
+    tags: ['Next Js', 'TypeScript', 'Prisma', 'Tailwind', 'ChatGPT', 'Vercel']
   },
   {
-    title: "Niagaweb",
-    image: "/img/webPorto/Niagaweb-studycase.png",
-    linkGithub: "https://github.com/HerlambangK/big-project",
-    priview: "https://landing-page-niagaweb.vercel.app/",
+    title: 'Niagaweb',
+    image: '/img/webPorto/Niagaweb-studycase.png',
+    linkGithub: 'https://github.com/HerlambangK/big-project',
+    priview: 'https://landing-page-niagaweb.vercel.app/',
     description:
-      "Platform is a case study of creating an order system interface for users who want to easily customize and order a website.",
-    tags: ["Next Js", "TypeScript", "Prisma", "Tailwind", "ChatGPT", "Vercel"],
-  },
-]);
+      'Platform is a case study of creating an order system interface for users who want to easily customize and order a website.',
+    tags: ['Next Js', 'TypeScript', 'Prisma', 'Tailwind', 'ChatGPT', 'Vercel']
+  }
+])
 </script>
