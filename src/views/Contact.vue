@@ -29,7 +29,7 @@
             v-for="province in provinces"
             :value="province.id"
             :key="province.id"
-            @change="formData.province = province.name"
+            @change="handleProvince"
           >
             {{ province.name }}
           </option>
@@ -98,7 +98,7 @@
 </template>
 
 <script>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted, computed, watch } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
@@ -123,47 +123,103 @@ export default {
       village: ''
     })
 
+    // onMounted(async () => {
+    //   await store.dispatch('fetchProvinces')
+    //   provinces.value = store.getters.getProvinces
+    //   console.log('provinces:', selectedProvince)
+    //   // formData.province = selectedProvinceName
+    //   handleProvince(selectedProvince)
+    // })
+
     onMounted(async () => {
+      fetchProvinces()
+    })
+
+    const fetchProvinces = async () => {
       await store.dispatch('fetchProvinces')
       provinces.value = store.getters.getProvinces
-      formData.province = provinces.value[0].name
+    }
+
+    const selectedProvinceName = computed(() => {
+      const provinceId = selectedProvince.value
+      const selected = provinces.value.find((province) => province.id === provinceId)
+      // console.log('provinceId :', provinceId)
+      // console.log('selected :', selected)
+      return selected ? selected.name : ''
     })
+
+    watch(
+      () => selectedProvinceName.value,
+      (newProvinceName) => {
+        formData.province = newProvinceName
+      }
+    )
 
     const fetchRegencies = async () => {
       if (selectedProvince.value) {
         await store.dispatch('fetchRegencies', selectedProvince.value)
         regencies.value = store.getters.getRegencies
-        formData.regency = regencies.value[0].name
       }
     }
+
+    const selectedRegenciesName = computed(() => {
+      const regenciesId = selectedRegency.value
+      const selected = regencies.value.find((regencies) => regencies.id === regenciesId)
+      return selected ? selected.name : ''
+    })
+
+    watch(
+      () => selectedRegenciesName.value,
+      (newRegencyName) => {
+        formData.regency = newRegencyName
+      }
+    )
 
     const fetchDistricts = async () => {
       if (selectedRegency.value) {
         await store.dispatch('fetchDistricts', selectedRegency.value)
         districts.value = store.getters.getDistricts
-        formData.district = districts.value[0].name
       }
     }
+
+    const selectedDistrictsName = computed(() => {
+      const districtsId = selectedDistrict.value
+      const selected = districts.value.find((district) => district.id === districtsId)
+      return selected ? selected.name : ''
+    })
+
+    watch(
+      () => selectedDistrictsName.value,
+      (newDistrictsName) => {
+        formData.district = newDistrictsName
+      }
+    )
 
     const fetchVillages = async () => {
       if (selectedDistrict.value) {
         await store.dispatch('fetchVillages', selectedDistrict.value)
         villages.value = store.getters.getVillages
-        formData.village = villages.value[0].name
       }
     }
 
+    const selectiedVillageName = computed(() => {
+      const villageId = selectedVillage.value
+      const selected = villages.value.find((village) => village.id === villageId)
+      return selected ? selected.name : ''
+    })
+
+    watch(
+      () => selectiedVillageName.value,
+      (newVillageName) => {
+        formData.village = newVillageName
+      }
+    )
+
     const submitForm = async () => {
       try {
-        alert('success, Data terkirim', formData)
-        //   const { data, error } = await sendEmail(
-        //     formData.senderEmail,
-        //     formData.message
-        //   );
-        console.log('formData', formData)
+        alert('Data terkirim: ' + JSON.stringify(formData, null, 2))
       } catch (error) {
-        console.log(error)
-        return
+        console.error(error)
       }
     }
 

@@ -13,7 +13,7 @@
         </div>
       </div>
 
-      <Button :icon-left="EnvelopeIcon">Hallo</Button>
+      <!-- <Button :icon-left="EnvelopeIcon">Hallo</Button> -->
 
       <a
         class="text-black bg-white md:opacity-50 hover:opacity-100 px-7 py-2 items-center rounded-full cursor-pointer borderBlack"
