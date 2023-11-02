@@ -123,6 +123,12 @@ export default {
       village: ''
     })
 
+    onMounted(async () => {
+      await store.dispatch('fetchProvinces')
+      provinces.value = store.getters.getProvinces
+      formData.province = provinces.value[0].name
+    })
+
     const fetchRegencies = async () => {
       if (selectedProvince.value) {
         await store.dispatch('fetchRegencies', selectedProvince.value)
@@ -146,12 +152,6 @@ export default {
         formData.village = villages.value[0].name
       }
     }
-
-    onMounted(async () => {
-      await store.dispatch('fetchProvinces')
-      provinces.value = store.getters.getProvinces
-      formData.province = provinces.value[0].name
-    })
 
     const submitForm = async () => {
       try {
