@@ -145,6 +145,7 @@ export default {
       const selected = provinces.value.find((province) => province.id === provinceId)
       // console.log('provinceId :', provinceId)
       // console.log('selected :', selected)
+      store.commit('setProvinces', selected)
       return selected ? selected.name : ''
     })
 

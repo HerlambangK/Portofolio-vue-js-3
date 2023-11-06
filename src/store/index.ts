@@ -17,7 +17,7 @@ interface State {
 
 // const store: Store<State> = createStore({
 // const store = createStore<State>({
-export default createStore({
+export default createStore<State>({
   state: {
     provinces: [],
     regencies: [],

@@ -12,15 +12,21 @@
           <span class="md:text-md font-medium text-gray-400"> Front End Developer </span>
         </div>
       </div>
+      <!-- <Button as="a" href="/about" :icon-left="EnvelopeIcon" :icon-right="EnvelopeIcon" loading -->
+      <Button
+        as="a"
+        href="https://drive.google.com/file/d/1YJn2wOzukXXGytwt8IaQ8vKQgOOTBuCK/view?usp=sharing"
+        :icon-left="MagnifyingGlassCircleIcon"
+        intent="secondary"
+        >Download CV</Button
+      >
 
-      <!-- <Button :icon-left="EnvelopeIcon">Hallo</Button> -->
-
-      <a
+      <!-- <a
         class="text-black bg-white md:opacity-50 hover:opacity-100 px-7 py-2 items-center rounded-full cursor-pointer borderBlack"
-        :href="'https://drive.google.com/file/d/1YJn2wOzukXXGytwt8IaQ8vKQgOOTBuCK/view?usp=sharing'"
+        href="https://drive.google.com/file/d/1YJn2wOzukXXGytwt8IaQ8vKQgOOTBuCK/view?usp=sharing"
       >
         Download CV
-      </a>
+      </a> -->
     </div>
     <div class="mx-auto max-w-screen-lg px-8 lg:px-1 py-6">
       <div class="mb-6 text-2xl font-bold">
@@ -55,13 +61,17 @@
         </a>
       </div>
     </div>
+    <div class="">Provinsi : {{ Prov.name }}</div>
   </main>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import Button from '../components/Button.vue'
-import { EnvelopeIcon } from '@heroicons/vue/20/solid'
+import { MagnifyingGlassCircleIcon } from '@heroicons/vue/20/solid'
+
+import { useStore } from 'vuex'
+
 const items = ref([
   {
     title: 'Bembie Resto',
@@ -85,4 +95,12 @@ const items = ref([
     description: 'https://landing-page-niagaweb.vercel.app/'
   }
 ])
+
+const store = useStore()
+
+const Prov = computed(() => {
+  console.log(store.getters.getProvinces)
+  console.log(store.state.provinces)
+  return store.getters.getProvinces
+})
 </script>
