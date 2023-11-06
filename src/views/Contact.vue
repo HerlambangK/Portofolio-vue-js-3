@@ -1,5 +1,8 @@
 <template>
-  <div id="contact" ref="contactSection" class="mb-20 sm:mb-28 text-center mx-3" v-if="showSection">
+  <Alert title="Horaay!" intent="success" :show="showAlert" :on-dismiss="() => (showAlert = false)">
+    Email Sent Succecessfully. Keep doing it!
+  </Alert>
+  <div id="contact" ref="contactSection" class="mb-20 sm:mb-28 text-center mx-3">
     <div class="text-4xl font-semibold">Contact me</div>
 
     <p class="mt-6 text-white/80">
@@ -100,8 +103,12 @@
 <script>
 import { ref, reactive, onMounted, computed, watch } from 'vue'
 import { useStore } from 'vuex'
+import Alert from '../components/Alert.vue'
 
 export default {
+  components: {
+    Alert
+  },
   setup() {
     const store = useStore()
     const provinces = ref([])
@@ -113,7 +120,8 @@ export default {
     const selectedDistrict = ref('')
     const selectedVillage = ref('')
     const contactSection = ref(null)
-    const showSection = ref(true)
+    // const showSection = ref(true)
+    const showAlert = ref(false)
     const formData = reactive({
       senderEmail: '',
       message: '',
@@ -218,7 +226,9 @@ export default {
 
     const submitForm = async () => {
       try {
-        alert('Data terkirim: ' + JSON.stringify(formData, null, 2))
+        showAlert.value = true
+        console.log(formData)
+        // alert('Data terkirim: ' + JSON.stringify(formData, null, 2))
       } catch (error) {
         console.error(error)
       }
@@ -226,7 +236,8 @@ export default {
 
     return {
       contactSection,
-      showSection,
+      // showSection,
+      showAlert,
       formData,
       submitForm,
       selectedProvince,
