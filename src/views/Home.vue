@@ -61,7 +61,7 @@
         </a>
       </div>
     </div>
-    <div class="">Provinsi : {{ Prov.name }}</div>
+    <!-- <div class="">Provinsi : {{ Prov.name }}</div> -->
   </main>
 </template>
 
