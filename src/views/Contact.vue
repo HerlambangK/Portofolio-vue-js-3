@@ -1,5 +1,11 @@
 <template>
-  <Alert title="Horaay!" intent="success" :show="showAlert" :on-dismiss="() => (showAlert = false)">
+  <Alert
+    title="Horaay!"
+    intent="success"
+    :formData="formData"
+    :show="showAlert"
+    :on-dismiss="() => (showAlert = false)"
+  >
     Email Sent Succecessfully. Keep doing it!
   </Alert>
   <div id="contact" ref="contactSection" class="mb-20 sm:mb-28 text-center mx-3">
@@ -28,12 +34,7 @@
           @change="fetchRegencies"
         >
           <option disabled value="">Pilih Provinsi</option>
-          <option
-            v-for="province in provinces"
-            :value="province.id"
-            :key="province.id"
-            @change="handleProvince"
-          >
+          <option v-for="province in provinces" :value="province.id" :key="province.id">
             {{ province.name }}
           </option>
         </select>
@@ -43,12 +44,7 @@
           @change="fetchDistricts"
         >
           <option disabled value="">Pilih Kabupaten</option>
-          <option
-            v-for="regency in regencies"
-            :value="regency.id"
-            :key="regency.id"
-            @change="formData.regency = regency.name"
-          >
+          <option v-for="regency in regencies" :value="regency.id" :key="regency.id">
             {{ regency.name }}
           </option>
         </select>
@@ -58,12 +54,7 @@
           @change="fetchVillages"
         >
           <option disabled value="">Pilih Kecamatan</option>
-          <option
-            v-for="district in districts"
-            :value="district.id"
-            :key="district.id"
-            @change="formData.district = district.name"
-          >
+          <option v-for="district in districts" :value="district.id" :key="district.id">
             {{ district.name }}
           </option>
         </select>
@@ -73,12 +64,7 @@
           @change="fetchVillages"
         >
           <option disabled value="">Pilih Desa</option>
-          <option
-            v-for="village in villages"
-            :value="village.id"
-            :key="village.id"
-            @change="formData.village = village.name"
-          >
+          <option v-for="village in villages" :value="village.id" :key="village.id">
             {{ village.name }}
           </option>
         </select>
@@ -100,158 +86,135 @@
   </div>
 </template>
 
-<script>
+<script lang="ts" setup>
 import { ref, reactive, onMounted, computed, watch } from 'vue'
 import { useStore } from 'vuex'
 import Alert from '../components/Alert.vue'
 
-export default {
-  components: {
-    Alert
-  },
-  setup() {
-    const store = useStore()
-    const provinces = ref([])
-    const regencies = ref([])
-    const districts = ref([])
-    const villages = ref([])
-    const selectedProvince = ref('')
-    const selectedRegency = ref('')
-    const selectedDistrict = ref('')
-    const selectedVillage = ref('')
-    const contactSection = ref(null)
-    // const showSection = ref(true)
-    const showAlert = ref(false)
-    const formData = reactive({
-      senderEmail: '',
-      message: '',
-      province: '',
-      regency: '',
-      district: '',
-      village: ''
-    })
+interface Location {
+  id: number
+  name: string
+}
 
-    // onMounted(async () => {
-    //   await store.dispatch('fetchProvinces')
-    //   provinces.value = store.getters.getProvinces
-    //   console.log('provinces:', selectedProvince)
-    //   // formData.province = selectedProvinceName
-    //   handleProvince(selectedProvince)
-    // })
+interface State {
+  provinces: Location[]
+  regencies: Location[]
+  districts: Location[]
+  villages: Location[]
+}
 
-    onMounted(async () => {
-      fetchProvinces()
-    })
+const store = useStore()
+const provinces = ref<Location[]>([])
+const regencies = ref<Location[]>([])
+const districts = ref<Location[]>([])
+const villages = ref<Location[]>([])
+const selectedProvince = ref<number | string>('')
+const selectedRegency = ref<number | string>('')
+const selectedDistrict = ref<number | string>('')
+const selectedVillage = ref<number | string>('')
+const contactSection = ref(null)
+const showAlert = ref(false)
+const formData = reactive({
+  senderEmail: '',
+  message: '',
+  province: '',
+  regency: '',
+  district: '',
+  village: ''
+})
 
-    const fetchProvinces = async () => {
-      await store.dispatch('fetchProvinces')
-      provinces.value = store.getters.getProvinces
-    }
+onMounted(async () => {
+  fetchProvinces()
+})
 
-    const selectedProvinceName = computed(() => {
-      const provinceId = selectedProvince.value
-      const selected = provinces.value.find((province) => province.id === provinceId)
-      // console.log('provinceId :', provinceId)
-      // console.log('selected :', selected)
-      store.commit('setProvinces', selected)
-      return selected ? selected.name : ''
-    })
+const fetchProvinces = async () => {
+  await store.dispatch('fetchProvinces')
+  provinces.value = store.getters.getProvinces
+}
 
-    watch(
-      () => selectedProvinceName.value,
-      (newProvinceName) => {
-        formData.province = newProvinceName
-      }
-    )
+const selectedProvinceName = computed(() => {
+  const provinceId = selectedProvince.value
+  const selected = provinces.value.find((province: any) => province.id === provinceId)
+  // console.log('provinceId :', provinceId)
+  // console.log('selected :', selected)
+  store.commit('setProvinces', selected)
+  return selected ? selected.name : ''
+})
 
-    const fetchRegencies = async () => {
-      if (selectedProvince.value) {
-        await store.dispatch('fetchRegencies', selectedProvince.value)
-        regencies.value = store.getters.getRegencies
-      }
-    }
+watch(
+  () => selectedProvinceName.value,
+  (newProvinceName) => {
+    formData.province = newProvinceName
+  }
+)
 
-    const selectedRegenciesName = computed(() => {
-      const regenciesId = selectedRegency.value
-      const selected = regencies.value.find((regencies) => regencies.id === regenciesId)
-      return selected ? selected.name : ''
-    })
+const fetchRegencies = async () => {
+  if (selectedProvince.value) {
+    await store.dispatch('fetchRegencies', selectedProvince.value)
+    regencies.value = store.getters.getRegencies
+  }
+}
 
-    watch(
-      () => selectedRegenciesName.value,
-      (newRegencyName) => {
-        formData.regency = newRegencyName
-      }
-    )
+const selectedRegenciesName = computed(() => {
+  const regenciesId = selectedRegency.value
+  const selected = regencies.value.find((regencies: any) => regencies.id === regenciesId)
+  return selected ? selected.name : ''
+})
 
-    const fetchDistricts = async () => {
-      if (selectedRegency.value) {
-        await store.dispatch('fetchDistricts', selectedRegency.value)
-        districts.value = store.getters.getDistricts
-      }
-    }
+watch(
+  () => selectedRegenciesName.value,
+  (newRegencyName) => {
+    formData.regency = newRegencyName
+  }
+)
 
-    const selectedDistrictsName = computed(() => {
-      const districtsId = selectedDistrict.value
-      const selected = districts.value.find((district) => district.id === districtsId)
-      return selected ? selected.name : ''
-    })
+const fetchDistricts = async () => {
+  if (selectedRegency.value) {
+    await store.dispatch('fetchDistricts', selectedRegency.value)
+    districts.value = store.getters.getDistricts
+  }
+}
 
-    watch(
-      () => selectedDistrictsName.value,
-      (newDistrictsName) => {
-        formData.district = newDistrictsName
-      }
-    )
+const selectedDistrictsName = computed(() => {
+  const districtsId = selectedDistrict.value
+  const selected = districts.value.find((district) => district.id === districtsId)
+  return selected ? selected.name : ''
+})
 
-    const fetchVillages = async () => {
-      if (selectedDistrict.value) {
-        await store.dispatch('fetchVillages', selectedDistrict.value)
-        villages.value = store.getters.getVillages
-      }
-    }
+watch(
+  () => selectedDistrictsName.value,
+  (newDistrictsName) => {
+    formData.district = newDistrictsName
+  }
+)
 
-    const selectiedVillageName = computed(() => {
-      const villageId = selectedVillage.value
-      const selected = villages.value.find((village) => village.id === villageId)
-      return selected ? selected.name : ''
-    })
+const fetchVillages = async () => {
+  if (selectedDistrict.value) {
+    await store.dispatch('fetchVillages', selectedDistrict.value)
+    villages.value = store.getters.getVillages
+  }
+}
 
-    watch(
-      () => selectiedVillageName.value,
-      (newVillageName) => {
-        formData.village = newVillageName
-      }
-    )
+const selectedVillageName = computed(() => {
+  const villageId = selectedVillage.value
+  const selected = villages.value.find((village) => village.id === villageId)
+  return selected ? selected.name : ''
+})
 
-    const submitForm = async () => {
-      try {
-        showAlert.value = true
-        console.log(formData)
-        // alert('Data terkirim: ' + JSON.stringify(formData, null, 2))
-      } catch (error) {
-        console.error(error)
-      }
-    }
+watch(
+  () => selectedVillageName.value,
+  (newVillageName) => {
+    formData.village = newVillageName
+  }
+)
 
-    return {
-      contactSection,
-      // showSection,
-      showAlert,
-      formData,
-      submitForm,
-      selectedProvince,
-      selectedRegency,
-      selectedDistrict,
-      selectedVillage,
-      provinces,
-      regencies,
-      districts,
-      villages,
-      fetchRegencies,
-      fetchDistricts,
-      fetchVillages
-    }
+const submitForm = async () => {
+  try {
+    showAlert.value = true
+    console.log(formData)
+    // alert('Data terkirim: ' + JSON.stringify(formData, null, 2))
+  } catch (error) {
+    console.error(error)
   }
 }
 </script>
