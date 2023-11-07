@@ -1,5 +1,15 @@
 <template>
   <main>
+    <el-carousel class="">
+      <el-carousel-item v-for="item in items" :key="item">
+        <img
+          class="h-full w-full object-cover as-card-image rounded-md"
+          :src="item.image"
+          loading="lazy"
+          alt="Image {{ item.title }}"
+        />
+      </el-carousel-item>
+    </el-carousel>
     <div class="mx-auto max-w-screen-lg px-8 lg:px-1 py-6 mb-8">
       <div class="container lg:pr-8 mb-3">
         <h1
@@ -7,6 +17,7 @@
         >
           Hi, I'm Herlambang.
         </h1>
+
         <div class="flex flex-col lg:flex-row lg:items-center gap-3 mt-6">
           <hr class="w-10 border bg-gray-400" />
           <span class="md:text-md font-medium text-gray-400"> Front End Developer </span>
@@ -70,6 +81,8 @@ import { computed, ref } from 'vue'
 import Button from '../components/Button.vue'
 import { MagnifyingGlassCircleIcon } from '@heroicons/vue/20/solid'
 
+import { ElButton } from 'element-plus'
+
 import { useStore } from 'vuex'
 
 const items = ref([
@@ -104,3 +117,34 @@ const store = useStore()
 //   return store.getters.getProvinces
 // })
 </script>
+
+<style scoped>
+#app {
+  color: red;
+  background-color: blue;
+}
+.demonstration {
+  color: var(--el-text-color-secondary);
+}
+
+.el-carousel__item h3 {
+  color: #475669;
+  opacity: 0.75;
+  line-height: 150px;
+  margin: 0;
+  text-align: center;
+}
+/* 
+.el-carousel__arrow.el-carousel__arrow--left:hover {
+  background-color: rgba(184, 21, 21, 0.6) !important;
+}
+
+.el-carousel__arrow:hover {
+  background-color: rgb(17 116 230 / 63%);
+}
+
+.el-carousel__arrow.el-carousel__arrow--left [type='button'],
+.el-carousel__arrow.el-carousel__arrow--right [type='button']:hover {
+  background-color: red !important;
+} */
+</style>
