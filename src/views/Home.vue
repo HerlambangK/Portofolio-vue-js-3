@@ -98,9 +98,9 @@ const items = ref([
 
 const store = useStore()
 
-const Prov = computed(() => {
-  console.log(store.getters.getProvinces)
-  console.log(store.state.provinces)
-  return store.getters.getProvinces
-})
+// const Prov = computed(() => {
+//   console.log(store.getters.getProvinces)
+//   console.log(store.state.provinces)
+//   return store.getters.getProvinces
+// })
 </script>

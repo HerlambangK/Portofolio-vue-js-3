@@ -1,18 +1,19 @@
 // store.ts
 // import { createStore } from "vuex";
-import { createStore } from "vuex";
-import axios from "axios";
+import { createStore } from 'vuex'
+import axios from 'axios'
+import { locationStoreEnum } from '../../types/enums/store/locationStoreEnum'
 
 interface Location {
-  id: number;
-  name: string;
+  id: number
+  name: string
 }
 
 interface State {
-  provinces: Location[];
-  regencies: Location[];
-  districts: Location[];
-  villages: Location[];
+  provinces: Location[]
+  regencies: Location[]
+  districts: Location[]
+  villages: Location[]
 }
 
 // const store: Store<State> = createStore({
@@ -22,65 +23,63 @@ export default createStore<State>({
     provinces: [],
     regencies: [],
     districts: [],
-    villages: [],
+    villages: []
   },
 
   mutations: {
-    setProvinces(state: any, dataProvinces: Location[]) {
-      state.provinces = dataProvinces;
+    [locationStoreEnum.Mutations.SET_PROVINCES](state: any, dataProvinces: Location[]) {
+      state.provinces = dataProvinces
     },
-    setRegencies(state: any, regencies: Location[]) {
-      state.regencies = regencies;
+    [locationStoreEnum.Mutations.SET_REGENCIES](state: any, regencies: Location[]) {
+      state.regencies = regencies
     },
-    setDistricts(state: any, districts: Location[]) {
-      state.districts = districts;
+    [locationStoreEnum.Mutations.SET_DISTRICTS](state: any, districts: Location[]) {
+      state.districts = districts
     },
-    setVillages(state: any, villages: Location[]) {
-      state.villages = villages;
-    },
+    [locationStoreEnum.Mutations.SET_VILLAGES](state: any, villages: Location[]) {
+      state.villages = villages
+    }
   },
 
   actions: {
-    async fetchProvinces({ commit }: any) {
+    async [locationStoreEnum.Actions.FETCH_PROVINCES]({ commit }: any) {
       const response = await axios.get(
-        "https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json"
-      );
-      commit("setProvinces", response.data);
+        'https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json'
+      )
+      commit(locationStoreEnum.Mutations.SET_PROVINCES, response.data)
     },
-    async fetchRegencies({ commit }: any, provinceId: number) {
+    async [locationStoreEnum.Actions.FETCH_REGENCIES]({ commit }: any, provinceId: number) {
       const response = await axios.get(
         `https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${provinceId}.json`
-      );
-      commit("setRegencies", response.data);
+      )
+      commit(locationStoreEnum.Mutations.SET_REGENCIES, response.data)
     },
-    async fetchDistricts({ commit }: any, regencyId: number) {
+    async [locationStoreEnum.Actions.FETCH_DISTRICTS]({ commit }: any, regencyId: number) {
       const response = await axios.get(
         `https://www.emsifa.com/api-wilayah-indonesia/api/districts/${regencyId}.json`
-      );
-      commit("setDistricts", response.data);
+      )
+      commit(locationStoreEnum.Mutations.SET_DISTRICTS, response.data)
     },
-    async fetchVillages({ commit }: any, districtId: number) {
+    async [locationStoreEnum.Actions.FETCH_VILLAGES]({ commit }: any, districtId: number) {
       const response = await axios.get(
         `https://www.emsifa.com/api-wilayah-indonesia/api/villages/${districtId}.json`
-      );
-      commit("setVillages", response.data);
-    },
+      )
+      commit(locationStoreEnum.Mutations.SET_VILLAGES, response.data)
+    }
   },
 
   getters: {
-    getProvinces(state: any) {
-      return state.provinces;
+    [locationStoreEnum.Getters.GET_PROVINCES](state: any) {
+      return state.provinces
     },
-    getRegencies(state: any) {
-      return state.regencies;
+    [locationStoreEnum.Getters.GET_REGENCIES](state: any) {
+      return state.regencies
     },
-    getDistricts(state: any) {
-      return state.districts;
+    [locationStoreEnum.Getters.GET_DISTRICTS](state: any) {
+      return state.districts
     },
-    getVillages(state: any) {
-      return state.villages;
-    },
-  },
-});
-
-// export default store;
+    [locationStoreEnum.Getters.GET_VILLAGES](state: any) {
+      return state.villages
+    }
+  }
+})
