@@ -90,6 +90,7 @@
 import { ref, reactive, onMounted, computed, watch } from 'vue'
 import { useStore } from 'vuex'
 import Alert from '../components/Alert.vue'
+import { locationStoreEnum } from '../../types/enums/store/locationStoreEnum'
 
 interface Location {
   id: number
@@ -128,8 +129,9 @@ onMounted(async () => {
 })
 
 const fetchProvinces = async () => {
-  await store.dispatch('fetchProvinces')
-  provinces.value = store.getters.getProvinces
+  await store.dispatch(locationStoreEnum.Actions.FETCH_PROVINCES)
+  provinces.value = store.getters[locationStoreEnum.Getters.GET_PROVINCES]
+  // console.log(provinces.value)
 }
 
 const selectedProvinceName = computed(() => {
@@ -137,7 +139,7 @@ const selectedProvinceName = computed(() => {
   const selected = provinces.value.find((province: any) => province.id === provinceId)
   // console.log('provinceId :', provinceId)
   // console.log('selected :', selected)
-  store.commit('setProvinces', selected)
+  store.commit(locationStoreEnum.Mutations.SET_PROVINCES, selected)
   return selected ? selected.name : ''
 })
 
@@ -150,8 +152,9 @@ watch(
 
 const fetchRegencies = async () => {
   if (selectedProvince.value) {
-    await store.dispatch('fetchRegencies', selectedProvince.value)
-    regencies.value = store.getters.getRegencies
+    await store.dispatch(locationStoreEnum.Actions.FETCH_REGENCIES, selectedProvince.value)
+    regencies.value = store.getters[locationStoreEnum.Getters.GET_REGENCIES]
+    console.log('regencies.value', regencies.value)
   }
 }
 
@@ -170,8 +173,8 @@ watch(
 
 const fetchDistricts = async () => {
   if (selectedRegency.value) {
-    await store.dispatch('fetchDistricts', selectedRegency.value)
-    districts.value = store.getters.getDistricts
+    await store.dispatch(locationStoreEnum.Actions.FETCH_DISTRICTS, selectedRegency.value)
+    districts.value = store.getters[locationStoreEnum.Getters.GET_DISTRICTS]
   }
 }
 
@@ -190,8 +193,8 @@ watch(
 
 const fetchVillages = async () => {
   if (selectedDistrict.value) {
-    await store.dispatch('fetchVillages', selectedDistrict.value)
-    villages.value = store.getters.getVillages
+    await store.dispatch(locationStoreEnum.Actions.FETCH_VILLAGES, selectedDistrict.value)
+    villages.value = store.getters[locationStoreEnum.Getters.GET_VILLAGES]
   }
 }
 

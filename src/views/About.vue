@@ -13,9 +13,7 @@
       </div>
     </header>
     <div class="my-7 md:grid-cols-2 xl:grid-cols-4 mx-auto max-w-3xl">
-      <div
-        class="flex flex-col justify-content-center items-center text-center p-8 group"
-      >
+      <div class="flex flex-col justify-content-center items-center text-center p-8 group">
         <img
           class="object-cover w-32 h-32 rounded-full ring-4 ring-gray-300"
           src="/img/Herlambang.webp"
@@ -24,20 +22,15 @@
           height="32"
           alt="Herlambang"
         />
-        <h1
-          class="mt-6 text-2xl font-semibold text-white capitalize dark:text-white"
-        >
+        <h1 class="mt-6 text-2xl font-semibold text-white capitalize dark:text-white">
           Herlambang K
         </h1>
-        <p class="mt-2 capitalize text-gray-300 dark:text-gray-500">
-          Front End Developer,
-        </p>
+        <p class="mt-2 capitalize text-gray-300 dark:text-gray-500">Front End Developer,</p>
         <p class="my-8 text-gray-400 dark:text-gray-500">
-          I am a front end developer with an amazing ability to develop websites
-          that are both functional and aesthetically pleasing. I have a strong
-          understanding of web standards and best practices, and I am passionate
-          about creating easy to use websites for users and visually appealing.
-          I focus on core web vitals and development design system.
+          I am a front end developer with an amazing ability to develop websites that are both
+          functional and aesthetically pleasing. I have a strong understanding of web standards and
+          best practices, and I am passionate about creating easy to use websites for users and
+          visually appealing. I focus on core web vitals and development design system.
         </p>
         <div class="flex mt-3 -mx-2">
           <a
@@ -124,22 +117,84 @@
         </div>
       </div>
     </div>
+    <!-- <div class="">
+      <p>Counter :{{ counter }}</p>
+      <button class="" @click="increment">increment Counter</button>
+      <button @click="unmountComponent">Unmount Component</button>
+    </div> -->
   </main>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import {
+  onBeforeMount,
+  onBeforeUpdate,
+  onMounted,
+  onUpdated,
+  ref,
+  onBeforeUnmount,
+  onRenderTracked
+} from 'vue'
 
 const items = ref([
   {
-    title: "Web production Spesialist",
-    place: "Niagahoster | Yogyakarta",
-    date: "Feb 2019  Ags 2023",
+    title: 'Web production Spesialist',
+    place: 'Niagahoster | Yogyakarta',
+    date: 'Feb 2019  Ags 2023'
   },
   {
-    title: "Full Stack Web Bootcamp",
-    place: "Binar Academy",
-    date: "16 Aug 2020 - 15 Mar 2023",
-  },
-]);
+    title: 'Full Stack Web Bootcamp',
+    place: 'Binar Academy',
+    date: '16 Aug 2020 - 15 Mar 2023'
+  }
+])
+
+const counter = ref(0)
+
+onBeforeMount(() => {
+  console.log('OnBeforeMount: Component di mount', counter.value)
+})
+
+onMounted(() => {
+  console.log('OnMounted: Component di load', counter.value)
+})
+
+onBeforeUpdate(() => {
+  console.log('OnBeforeUpdate: Component di update', counter.value)
+})
+
+onUpdated(() => {
+  console.log('OnUpdated: Component di update', counter.value)
+})
+
+onBeforeUnmount(() => {
+  console.log('Component beforeUnmount', counter.value)
+  // Perform any cleanup tasks that must be done before the component is unmounted
+})
+
+// Method untuk mengubah pesan
+const increment = () => {
+  counter.value++
+}
+
+const unmountComponent = () => {
+  // Memanggil unmount untuk menghapus komponen
+  app.unmount()
+}
+
+// Method untuk meng-unmount komponen
+
+// onRenderTracked((target) => {
+//   console.log('Render Tracked', target)
+// })
+
+// if (import.meta.env.VUE_APP_VUE_VERSION === '3.2.0') {
+//   onPending((info) => {
+//     console.log('Pending', info)
+//   })
+
+//   onErrorCaptured((error) => {
+//     console.error('Error Captured', error)
+//   })
+// }
 </script>
