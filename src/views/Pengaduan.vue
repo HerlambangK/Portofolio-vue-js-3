@@ -51,7 +51,7 @@
 
       <div class="flex">
         <label
-          class="w-[15%] h-10 mt-4 mb-1 bg-white text-slate-400 rounded-md mr-1 items-start"
+          class="w-[15%] h-10 text-sm md:text-lg mt-4 mb-1 bg-white text-slate-400 rounded-md mr-1 items-start"
           for="senderFileNIK"
           >Your NIK</label
         >
