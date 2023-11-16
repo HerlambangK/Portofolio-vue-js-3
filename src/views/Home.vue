@@ -1,9 +1,9 @@
 <template>
   <main>
-    <el-carousel class="">
+    <el-carousel class="rounded-xl m-3 h-1/2">
       <el-carousel-item v-for="item in items" :key="item">
         <img
-          class="h-full w-full object-cover as-card-image rounded-md"
+          class="h-full w-full object-cover as-card-image"
           :src="item.image"
           loading="lazy"
           alt="Image {{ item.title }}"
