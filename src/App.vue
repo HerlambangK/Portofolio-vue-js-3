@@ -33,7 +33,7 @@
                       isExactActive
                         ? 'text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700'
                         : 'text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700',
-                      i > 0 && 'ml-4',
+                      i > 0 && 'ml-4'
                     ]"
                     >{{ link.text }}</a
                   >
@@ -49,12 +49,7 @@
               class="inline-flex items-center justify-center p-2 text-gray-400 rounded-md hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white"
               @click="showMenu = !showMenu"
             >
-              <svg
-                class="block w-6 h-6"
-                stroke="currentColor"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
+              <svg class="block w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -62,12 +57,7 @@
                   d="M4 6h16M4 12h16M4 18h16"
                 />
               </svg>
-              <svg
-                class="hidden w-6 h-6"
-                stroke="currentColor"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
+              <svg class="hidden w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -97,7 +87,7 @@
                 isExactActive
                   ? 'text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700'
                   : 'text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700',
-                i > 0 && 'mt-1',
+                i > 0 && 'mt-1'
               ]"
               >{{ link.text }}</a
             >
@@ -106,27 +96,26 @@
       </div>
     </nav>
 
-    <div
-      class="max-w-screen-xl sm:py-6 mx-auto sm:px-6 lg:px-8 overflow-hidden"
-    >
+    <div class="max-w-screen-xl sm:py-6 mx-auto sm:px-6 lg:px-8 overflow-hidden">
       <router-view />
     </div>
   </div>
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   data: () => ({
     showMenu: false,
     showProfileMenu: false,
     links: [
-      { text: "Home", to: "/" },
-      { text: "About", to: "/about" },
-      { text: "Portofolio", to: "/portofolio" },
-      { text: "Contact", to: "/contact" },
-    ],
-  }),
-});
+      { text: 'Home', to: '/' },
+      { text: 'About', to: '/about' },
+      { text: 'Portofolio', to: '/portofolio' },
+      { text: 'Pengaduan', to: '/pengaduan' },
+      { text: 'Contact', to: '/contact' }
+    ]
+  })
+})
 </script>

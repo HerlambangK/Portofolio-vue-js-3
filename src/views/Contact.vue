@@ -27,7 +27,8 @@
         :maxlength="500"
         placeholder="Your email"
       />
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+
+      <!-- <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
         <select
           class="h-10 text-xs font-semibold md:text-lg md:h-14 md:px-4 mt-3 rounded-lg borderBlack bg-white bg-opacity-80 focus:bg-opacity-100 transition-all outline-none text-black"
           v-model="selectedProvince"
@@ -68,7 +69,7 @@
             {{ village.name }}
           </option>
         </select>
-      </div>
+      </div> -->
       <textarea
         v-model="formData.message"
         class="h-52 my-3 rounded-lg borderBlack p-4 dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-none text-black"
