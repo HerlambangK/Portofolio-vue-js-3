@@ -108,15 +108,8 @@
         </div>
       </div>
     </div>
-    <div class="grid grid-cols-1 gap-6 md:grid-cols-3 m-5">
-      <div class="overflow-hidden rounded-md bg-gray-800" v-for="item in items">
-        <div class="px-4 pt-5 pb-6">
-          <h2 class="text-xl font-semibold">{{ item.title }}</h2>
-          <p class="mt-3 text-sm text-gray-200">{{ item.place }}</p>
-          <p class="mt-1 text-xs text-gray-400">{{ item.date }}</p>
-        </div>
-      </div>
-    </div>
+
+    <!-- <InputCustom @clicked="clickMe" /> -->
     <!-- <div class="">
       <p>Counter :{{ counter }}</p>
       <button class="" @click="increment">increment Counter</button>
@@ -126,6 +119,7 @@
 </template>
 
 <script setup>
+// import InputCustom from '@/components/inputCustom.vue'
 import {
   onBeforeMount,
   onBeforeUpdate,
@@ -150,6 +144,10 @@ const items = ref([
 ])
 
 const counter = ref(0)
+
+const clickMe = (name) => {
+  alert('Click Me' + name)
+}
 
 onBeforeMount(() => {
   console.log('OnBeforeMount: Component di mount', counter.value)
