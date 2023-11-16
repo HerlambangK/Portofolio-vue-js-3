@@ -82,7 +82,7 @@
 
       <div class="flex">
         <label
-          class="w-[15%] h-10 mt-4 mb-1 bg-white text-slate-400 rounded-md mr-1"
+          class="w-[15%] h-10 mt-4 mb-1 text-sm md:text-lg bg-white text-slate-400 rounded-md mr-1"
           for="senderFileNIK"
           >Kartu Keluarga
         </label>
@@ -190,7 +190,7 @@
           />
           {{ reason }}</label
         >
-        <p>Selected Reason: {{ formData.reason }}</p>
+        <!-- <p>Selected Reason: {{ formData.reason }}</p> -->
       </div>
       <textarea
         v-model="formData.message"
