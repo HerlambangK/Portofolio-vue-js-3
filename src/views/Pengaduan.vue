@@ -249,7 +249,7 @@ const selectedRegency = ref<number | string>('')
 const selectedDistrict = ref<number | string>('')
 const selectedVillage = ref<number | string>('')
 const label = ref<string>(
-  'Saya menyatakan bahwa data yang diisikan adalah benardan siap mempertanggungjawabkan apabila ditemukan ketidaksesuaian dalam data tersebut'
+  'Saya menyatakan bahwa data yang diisikan adalah benar dan siap mempertanggung jawabkan apabila ditemukan ketidaksesuaian dalam data tersebut'
 )
 const contactSection = ref(null)
 const showAlert = ref(false)
