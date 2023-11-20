@@ -1,18 +1,18 @@
 // store.ts
 // import { createStore } from "vuex";
-import { createStore } from "vuex";
-import axios from "axios";
+import { createStore } from 'vuex'
+import axios from 'axios'
 
 interface Location {
-  id: number;
-  name: string;
+  id: number
+  name: string
 }
 
 interface State {
-  provinces: Location[];
-  regencies: Location[];
-  districts: Location[];
-  villages: Location[];
+  provinces: Location[]
+  regencies: Location[]
+  districts: Location[]
+  villages: Location[]
 }
 
 // const store: Store<State> = createStore({
@@ -22,65 +22,65 @@ export default createStore<State>({
     provinces: [],
     regencies: [],
     districts: [],
-    villages: [],
+    villages: []
   },
 
   mutations: {
     setProvinces(state: any, dataProvinces: Location[]) {
-      state.provinces = dataProvinces;
+      state.provinces = dataProvinces
     },
     setRegencies(state: any, regencies: Location[]) {
-      state.regencies = regencies;
+      state.regencies = regencies
     },
     setDistricts(state: any, districts: Location[]) {
-      state.districts = districts;
+      state.districts = districts
     },
     setVillages(state: any, villages: Location[]) {
-      state.villages = villages;
-    },
+      state.villages = villages
+    }
   },
 
   actions: {
     async fetchProvinces({ commit }: any) {
       const response = await axios.get(
-        "https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json"
-      );
-      commit("setProvinces", response.data);
+        'https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json'
+      )
+      commit('setProvinces', response.data)
     },
     async fetchRegencies({ commit }: any, provinceId: number) {
       const response = await axios.get(
         `https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${provinceId}.json`
-      );
-      commit("setRegencies", response.data);
+      )
+      commit('setRegencies', response.data)
     },
     async fetchDistricts({ commit }: any, regencyId: number) {
       const response = await axios.get(
         `https://www.emsifa.com/api-wilayah-indonesia/api/districts/${regencyId}.json`
-      );
-      commit("setDistricts", response.data);
+      )
+      commit('setDistricts', response.data)
     },
     async fetchVillages({ commit }: any, districtId: number) {
       const response = await axios.get(
         `https://www.emsifa.com/api-wilayah-indonesia/api/villages/${districtId}.json`
-      );
-      commit("setVillages", response.data);
-    },
+      )
+      commit('setVillages', response.data)
+    }
   },
 
   getters: {
     getProvinces(state: any) {
-      return state.provinces;
+      return state.provinces
     },
     getRegencies(state: any) {
-      return state.regencies;
+      return state.regencies
     },
     getDistricts(state: any) {
-      return state.districts;
+      return state.districts
     },
     getVillages(state: any) {
-      return state.villages;
-    },
-  },
-});
+      return state.villages
+    }
+  }
+})
 
 // export default store;

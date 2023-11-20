@@ -157,23 +157,25 @@
 
       <div class="grid grid-cols-2 md:grid-cols-2 gap-2">
         <input
-          v-model="formData.beforePandemic"
+          v-model="formattedBeforePandemic"
           class="h-10 px-4 rounded-lg mt-4 text-black"
           name="beforePandemic"
-          type="number"
+          type="text"
           required
           :maxlength="12"
           placeholder="Sallary Before Pandemic"
         />
+        <!-- <p>Hasil: {{ formData.beforePandemic }}</p> -->
         <input
-          v-model="formData.afterPandemic"
+          v-model="formattedAfterPandemic"
           class="h-10 px-4 rounded-lg mt-4 text-black"
           name="afterPandemic"
-          type="number"
+          type="text"
           required
           :maxlength="12"
           placeholder="Sallary After Pandemic"
         />
+        <!-- <p>Hasil: {{ formData.afterPandemic }}</p> -->
       </div>
       <div class="text-left">
         <label>Alasan membutuhkan bantuan</label>
@@ -209,8 +211,8 @@
           :id="label"
           v-model="formData.isChecked"
           class="text-left"
-          @click="handleisChecked"
         />
+        <!-- @click="handleisChecked" -->
         <label class="ml-2" :for="label">{{ label }}</label>
       </div>
       <button
@@ -261,14 +263,14 @@ const reasons = reactive([
 const formData = reactive({
   senderEmail: '',
   message: '',
-  nikFile: [],
-  kkFile: [],
+  nikFile: [] as any,
+  kkFile: [] as any,
   province: '',
   regency: '',
   district: '',
   village: '',
-  beforePandemic: '',
-  afterPandemic: '',
+  beforePandemic: 0,
+  afterPandemic: 0,
   noNIK: '',
   noKK: '',
   reason: '',
@@ -308,7 +310,7 @@ const handleNikFile = (event: any) => {
 
   if (fileInput.length > 0) {
     // Assuming you want to update formData.nik with an array of selected files
-    formData.nikFile = Array.from(fileInput).map((file) => ({
+    formData.nikFile = Array.from(fileInput).map((file: any) => ({
       name: file.name,
       preview: URL.createObjectURL(file)
     }))
@@ -334,6 +336,39 @@ const handleKKFile = (event: any) => {
 
 onMounted(async () => {
   fetchProvinces()
+})
+
+const formattedAfterPandemic = computed({
+  // getter
+  get() {
+    return new Intl.NumberFormat('id-ID', {
+      style: 'currency',
+      currency: 'IDR',
+      minimumFractionDigits: 0
+    }).format(formData.afterPandemic)
+  },
+  // setter
+  set(newValue) {
+    // Note: we are using destructuring assignment syntax here.
+    formData.afterPandemic = parseFloat(newValue.replace(/[^\d]/g, '')) || 0
+  }
+})
+const formattedBeforePandemic = computed({
+  // getter
+  get() {
+    return new Intl.NumberFormat('id-ID', {
+      style: 'currency',
+      currency: 'IDR',
+      minimumFractionDigits: 0
+    }).format(formData.beforePandemic)
+  },
+  // setter
+  set(newValue) {
+    // Menghapus karakter non-digit dari nilai input
+    const numericValue = parseFloat(newValue.replace(/[^\d]/g, '')) || 0
+
+    formData.beforePandemic = numericValue
+  }
 })
 
 const fetchProvinces = async () => {
