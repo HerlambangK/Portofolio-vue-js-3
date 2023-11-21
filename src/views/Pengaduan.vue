@@ -170,7 +170,7 @@
           v-model="formattedAfterPandemic"
           class="h-10 px-4 rounded-lg mt-4 text-black"
           name="afterPandemic"
-          type="text"
+          type="number"
           required
           :maxlength="12"
           placeholder="Sallary After Pandemic"
@@ -366,7 +366,6 @@ const formattedBeforePandemic = computed({
   set(newValue) {
     // Menghapus karakter non-digit dari nilai input
     const numericValue = parseFloat(newValue.replace(/[^\d]/g, '')) || 0
-
     formData.beforePandemic = numericValue
   }
 })
