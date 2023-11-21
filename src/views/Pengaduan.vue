@@ -170,7 +170,7 @@
           v-model="formattedAfterPandemic"
           class="h-10 px-4 rounded-lg mt-4 text-black"
           name="afterPandemic"
-          type="number"
+          type="text"
           required
           :maxlength="12"
           placeholder="Sallary After Pandemic"
